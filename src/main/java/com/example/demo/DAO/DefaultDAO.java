@@ -2,13 +2,22 @@ package com.example.demo.DAO;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.hibernate.SessionFactory;
 
 public class DefaultDAO {
     private static SessionFactory sessionFactory;
     private static EntityManager entityManager;
+    private static CriteriaBuilder criteriaBuilder;
 
-    public SessionFactory getSessionFactory() {
+    protected CriteriaBuilder getCriteriaBuilder() {
+        if(criteriaBuilder == null){
+            criteriaBuilder = getEntityManager().getCriteriaBuilder();
+        }
+        return criteriaBuilder;
+    }
+
+    protected SessionFactory getSessionFactory() {
         if(sessionFactory == null){
             sessionFactory =
                     (SessionFactory) Persistence
@@ -17,7 +26,7 @@ public class DefaultDAO {
         return sessionFactory;
     }
 
-    public EntityManager getEntityManager() {
+    protected EntityManager getEntityManager() {
         if(entityManager == null){
             SessionFactory sf = getSessionFactory();
             entityManager = sf.createEntityManager();
@@ -25,11 +34,11 @@ public class DefaultDAO {
         return entityManager;
     }
 
-    public void beginTransaction(){
+    protected void beginTransaction(){
         getEntityManager().getTransaction().begin();
     }
 
-    public void commitTransaction(){
+    protected void commitTransaction(){
         getEntityManager().getTransaction().commit();
     }
 }

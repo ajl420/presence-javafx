@@ -11,6 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "EVENT")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Event implements Serializable {
     @Id
     @Column(name = "event_id")
@@ -27,12 +28,6 @@ public class Event implements Serializable {
     @Column(name = "end_time")
     @Temporal(TemporalType.TIME)
     private Time endTime;
-
-    @Column(name = "event_date")
-    @Temporal(TemporalType.DATE)
-    private Date eventDate;
-    @ManyToMany
-    private Collection<Week> repeated = new ArrayList<>();
 
     @OneToMany(cascade = {CascadeType.MERGE})
     private Collection<Presence> presences = new ArrayList<>();
@@ -52,13 +47,6 @@ public class Event implements Serializable {
         return endTime;
     }
 
-    public Collection<Week> getRepeated() {
-        return repeated;
-    }
-
-    public Date getEventDate() {
-        return eventDate;
-    }
 
     public void setBeginTime(Time beginTime) {
         this.beginTime = beginTime;
@@ -70,18 +58,6 @@ public class Event implements Serializable {
 
     public void setEventName(String eventName) {
         this.eventName = eventName;
-    }
-
-    public void setRepeated(Set<Week> repeated) {
-        this.repeated = repeated;
-    }
-
-    public void setEventDate(Date eventDate) {
-        this.eventDate = eventDate;
-    }
-
-    public void setRepeated(Collection<Week> repeated) {
-        this.repeated = repeated;
     }
 
     public void setPresences(Collection<Presence> presences) {

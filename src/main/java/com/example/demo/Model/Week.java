@@ -11,14 +11,23 @@ import java.util.Collection;
 public class Week implements Serializable {
     @Id
     @Column(name = "day_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int dayId;
 
+    @Column(name = "day_label")
+    private String dayLabel;
     @Column(name = "day_name")
     private String dayName;
 
     @ManyToMany
     private Collection<Event> events = new ArrayList<Event>();
+
+    public Collection<Event> getEvents() {
+        return events;
+    }
+
+    public String getDayLabel() {
+        return dayLabel;
+    }
 
     public int getDayId() {
         return dayId;
@@ -30,5 +39,13 @@ public class Week implements Serializable {
 
     public void setDayName(String dayName) {
         this.dayName = dayName;
+    }
+
+    public void setDayLabel(String dayLabel) {
+        this.dayLabel = dayLabel;
+    }
+
+    public void setDayId(int dayId) {
+        this.dayId = dayId;
     }
 }

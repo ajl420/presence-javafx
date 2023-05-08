@@ -21,6 +21,8 @@
         <class>com.example.demo.Model.Presence</class>
         <class>com.example.demo.Model.Week</class>
         <class>com.example.demo.Model.Event</class>
+        <class>com.example.demo.Model.EventSingleDay</class>
+        <class>com.example.demo.Model.EventRepeated</class>
 
  
         <properties>
