@@ -27,7 +27,7 @@ tasks.withType(JavaCompile) {
 
 application {
 //    mainModule = 'com.example.demo'
-    mainClass = 'com.example.demo.HelloApplication'
+    mainClass = 'mg.disturb.Presence.HelloApplication'
 }
 
 javafx {
@@ -49,6 +49,7 @@ dependencies {
     implementation 'mysql:mysql-connector-java:8.0.33'
     implementation('jakarta.persistence:jakarta.persistence-api:2.2.3')
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+//    testImplementation 'junit:junit:4.13.1'
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
 
