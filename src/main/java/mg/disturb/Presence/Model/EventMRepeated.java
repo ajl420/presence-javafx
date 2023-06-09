@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 
 
 @Entity
-public class EventRepeated extends Event{
+public class EventMRepeated extends EventM {
     @Column(name = "repeated_day_id")
     int repeatedDayId;
 

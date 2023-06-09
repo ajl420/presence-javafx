@@ -27,7 +27,7 @@ tasks.withType(JavaCompile) {
 
 application {
 //    mainModule = 'com.example.demo'
-    mainClass = 'mg.disturb.Presence.HelloApplication'
+    mainClass = 'mg.disturb.Presence.App'
 }
 
 javafx {
@@ -37,20 +37,38 @@ javafx {
 
 dependencies {
     implementation('org.controlsfx:controlsfx:11.1.2')
-    implementation('com.dlsc.formsfx:formsfx-core:11.5.0') {
-        exclude(group: 'org.openjfx')
-    }
-    implementation('net.synedra:validatorfx:0.4.0') {
-        exclude(group: 'org.openjfx')
-    }
-    implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
+//    implementation('com.dlsc.formsfx:formsfx-core:11.5.0') {
+//        exclude(group: 'org.openjfx')
+//    }
+//    implementation('net.synedra:validatorfx:0.4.0') {
+//        exclude(group: 'org.openjfx')
+//    }
 
+    implementation 'org.kordamp.ikonli:ikonli-unicons-pack:12.3.1'
+    implementation 'com.jfoenix:jfoenix:9.0.10'
+    implementation 'org.jfxtras:jfxtras-controls:17-r1'
+//    implementation 'com.dlsc.gemsfx:gemsfx:1.72.0'
+    implementation 'io.github.palexdev:materialfx:11.16.1'
     implementation 'org.hibernate:hibernate-core:6.2.0.CR3'
     implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'cglib:cglib:3.3.0'
     implementation('jakarta.persistence:jakarta.persistence-api:2.2.3')
-    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+//    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
 //    testImplementation 'junit:junit:4.13.1'
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+//    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+}
+
+run{
+    jvmArgs = [
+            "--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=ALL-UNNAMED",
+//            "--add-exports=javafx.controls/com.sun.javafx.scene.control=ALL-UNNAMED",
+            "--add-exports=javafx.base/com.sun.javafx.binding=ALL-UNNAMED",
+            "--add-exports=javafx.base/com.sun.javafx.event=ALL-UNNAMED",
+            "--add-exports=javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED",
+            "--add-exports=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED",
+            "--add-exports=javafx.graphics/com.sun.javafx.scene=ALL-UNNAMED",
+            "--add-opens=java.base/java.lang.reflect=ALL-UNNAMED",
+    ]
 }
 
 test {

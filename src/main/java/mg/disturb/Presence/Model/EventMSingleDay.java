@@ -5,10 +5,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-public class EventSingleDay extends Event{
+public class EventMSingleDay extends EventM {
     @Column(name = "event_date")
     @Temporal(TemporalType.DATE)
     private Date eventDate;

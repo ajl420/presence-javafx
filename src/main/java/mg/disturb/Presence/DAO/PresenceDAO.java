@@ -5,7 +5,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Root;
-import mg.disturb.Presence.Model.Event;
+import mg.disturb.Presence.Model.EventM;
 import mg.disturb.Presence.Model.Presence;
 import mg.disturb.Presence.Utils.DateUtils;
 
@@ -17,11 +17,11 @@ public class PresenceDAO extends AbstractDAOWithModel<Presence,String> {
         this.modelClass = Presence.class;
     }
 
-    public Presence getCurrentPresenceFrom(Event event){
+    public Presence getCurrentPresenceFrom(EventM event){
         CriteriaBuilder cb = getCriteriaBuilder();
         CriteriaQuery<Presence> q = cb.createQuery(Presence.class);
         Root<Presence> root = q.from(Presence.class);
-        Join<Presence,Event> evnts = root.join("event");
+        Join<Presence, EventM> evnts = root.join("event");
         q.select(root);
         q.where(
                 cb.and(
@@ -47,7 +47,7 @@ public class PresenceDAO extends AbstractDAOWithModel<Presence,String> {
         CriteriaBuilder cb = getCriteriaBuilder();
         CriteriaQuery<Presence> q = cb.createQuery(Presence.class);
         Root<Presence> root = q.from(Presence.class);
-        Join<Presence,Event> eventJoin = root.join("event");
+        Join<Presence, EventM> eventJoin = root.join("event");
         q.select(root);
         q.where(
               cb.between(

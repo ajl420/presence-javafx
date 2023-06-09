@@ -23,7 +23,7 @@ public class Presence implements Serializable {
     private Collection<Student> students = new ArrayList<>();
 
     @ManyToOne(cascade = {CascadeType.MERGE})
-    private Event event;
+    private EventM event;
 
     public Date getPresenceDate() {
         return presenceDate;
@@ -32,14 +32,14 @@ public class Presence implements Serializable {
     public String getPresenceId() {
         return presenceId;
     }
-    public Event getEvent() {
+    public EventM getEvent() {
         return event;
     }
 
     public Collection<Student> getStudents() {
         return students;
     }
-    public void setEvent(Event event) {
+    public void setEvent(EventM event) {
         this.event = event;
         event.getPresences().add(this);
     }

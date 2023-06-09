@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="222.0" prefWidth="347.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <header>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="44.0" prefWidth="406.0">
+            <Label fx:id="dialogHeadTitle" alignment="CENTER" contentDisplay="CENTER" layoutY="5.0" prefHeight="35.0" prefWidth="289.0" text="Connectez-vous" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+                <font>
+                    <Font size="22.0" />
+                </font></Label>
+        </AnchorPane>
+    </header>
+    <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="347.0">
+            <VBox alignment="CENTER" layoutX="32.8" layoutY="32.8" prefHeight="90.0" prefWidth="303.0" spacing="18" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="22.0">
+                <ImageView fitHeight="77.0" fitWidth="79.0">
+                    <Image url="@../CustomComponent/Icons/wifi.png" />
+                </ImageView>
+                <Label fx:id="infoMess" alignment="CENTER" prefHeight="29.0" prefWidth="326.0" text="Connectez vous a l'adresse 192.168.43.1" />
+                <Label fx:id="errMess" alignment="CENTER" prefHeight="29.0" prefWidth="326.0" />
+            </VBox>
+        </AnchorPane>
+    </content>
+    <buttonTypes>
+        <ButtonType fx:constant="CANCEL" />
+        <ButtonType buttonData="FINISH" text="Emettre" />
+    </buttonTypes>
+</DialogPane>

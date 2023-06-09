@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="300.0" prefWidth="347.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <header>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="44.0" prefWidth="406.0">
+            <Label fx:id="dialogHeadTitle" alignment="CENTER" contentDisplay="CENTER" layoutY="5.0" prefHeight="35.0" prefWidth="289.0" text="Nouvelle Evenement" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+                <font>
+                    <Font size="16.0" />
+                </font></Label>
+        </AnchorPane>
+    </header>
+    <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="208.0" prefWidth="347.0">
+            <VBox layoutX="23.8" layoutY="32.8" prefHeight="210.0" prefWidth="287.0" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
+                <JFXTextField fx:id="numInscript" prefHeight="46.0" prefWidth="191.0" promptText="Numero d'inscription" />
+                <JFXTextField fx:id="nameStud" prefHeight="39.0" prefWidth="304.0" promptText="Nom de l'etudiant" />
+                <JFXTextField fx:id="fstNameStud" prefHeight="46.0" prefWidth="191.0" promptText="Prenom de l'etudiant"/>
+                <Label fx:id="errorMess" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="331.0" textFill="#f54949" />
+            </VBox>
+        </AnchorPane>
+    </content>
+    <buttonTypes>
+        <ButtonType fx:constant="CANCEL" />
+        <ButtonType fx:constant="FINISH" />
+    </buttonTypes>
+</DialogPane>

@@ -1,7 +1,6 @@
 package mg.disturb.Presence.Service;
 
 import mg.disturb.Presence.DAO.PresenceDAO;
-import mg.disturb.Presence.DAO.StudentDAO;
 import mg.disturb.Presence.Model.*;
 import mg.disturb.Presence.Utils.DateUtils;
 import mg.disturb.Presence.Utils.EventServiceUtils;
@@ -13,7 +12,7 @@ public class PresenceService {
     private static final PresenceDAO presenceDAO = new PresenceDAO();
     private static Presence currentPresence;
 
-    private static Presence preparePresence(Event event){
+    private static Presence preparePresence(EventM event){
         Presence presence = new Presence();
         presence.setPresenceDate(DateUtils.getCurrentDate());
         presence.setEvent(event);
@@ -23,7 +22,7 @@ public class PresenceService {
     }
 
     public static Presence getCurrentPresence() {
-        Event nearestEvent = EventService.getNearestEvent();
+        EventM nearestEvent = EventService.getNearestEvent();
         if (
                 (currentPresence == null ||
                 EventServiceUtils.isDelayedEvent(currentPresence.getEvent())) &&
@@ -67,6 +66,24 @@ public class PresenceService {
         return students;
     }
 
+    public static List<Student> absentStudentFrom(
+            Presence presence
+    ){
+        List<Student> students = StudentService.findAll();
+        return absentStudentFrom(presence, students);
+    }
+
+    public static List<Student> presentStudentFrom(Presence presence){
+        return (List<Student>) presence.getStudents();
+    }
+
+    public static List<Student> presentStudentFrom(
+            Presence presence,
+            List<Student> students
+    ){
+        students.removeIf(student -> !student.isPresentOn(presence));
+        return students;
+    }
     public static void update(Presence presence){
         presenceDAO.update(presence);
     }
@@ -87,9 +104,6 @@ public class PresenceService {
         presenceDAO.delete(presence);
     }
 
-    public static List<Student> presentStudentFrom(Presence presence){
-        return (List<Student>) presence.getStudents();
-    }
 
 
 }

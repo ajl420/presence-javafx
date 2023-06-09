@@ -19,9 +19,9 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>mg.disturb.Presence.Model.Student</class>
         <class>mg.disturb.Presence.Model.Presence</class>
-        <class>mg.disturb.Presence.Model.Event</class>
-        <class>mg.disturb.Presence.Model.EventSingleDay</class>
-        <class>mg.disturb.Presence.Model.EventRepeated</class>
+        <class>mg.disturb.Presence.Model.EventM</class>
+        <class>mg.disturb.Presence.Model.EventMSingleDay</class>
+        <class>mg.disturb.Presence.Model.EventMRepeated</class>
 
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost/Presence"/>

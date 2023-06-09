@@ -2,24 +2,23 @@ package mg.disturb.Presence.DAO;
 
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.criteria.*;
-import mg.disturb.Presence.Model.Event;
-import mg.disturb.Presence.Model.EventRepeated;
-import mg.disturb.Presence.Model.EventSingleDay;
-import mg.disturb.Presence.Model.Days;
+import mg.disturb.Presence.Model.*;
+import mg.disturb.Presence.Model.EventM;
+import mg.disturb.Presence.Model.EventMRepeated;
 import mg.disturb.Presence.Utils.DateUtils;
 
 import java.sql.Time;
 import java.util.List;
 
-public class EventDAO extends AbstractDAOWithModel<Event,String> {
+public class EventDAO extends AbstractDAOWithModel<EventM,String> {
     public EventDAO(){
-        this.modelClass = Event.class;
+        this.modelClass = EventM.class;
     }
 
-    public List<Event> findTakenTimeIntervall(Time startTime, Time endTime){
+    public List<EventM> findTakenTimeIntervall(Time startTime, Time endTime){
         CriteriaBuilder cb = getCriteriaBuilder();
-        CriteriaQuery<Event> q = cb.createQuery(Event.class);
-        Root<Event> root = q.from(Event.class);
+        CriteriaQuery<EventM> q = cb.createQuery(EventM.class);
+        Root<EventM> root = q.from(EventM.class);
         q.select(root);
         q.where(
               cb.or(
@@ -36,18 +35,18 @@ public class EventDAO extends AbstractDAOWithModel<Event,String> {
         return getEntityManager().createQuery(q).getResultList();
     }
 
-    public List<EventRepeated> getAllEventRepeated(){
+    public List<EventMRepeated> getAllEventRepeated(){
         CriteriaBuilder cb = getCriteriaBuilder();
-        CriteriaQuery<EventRepeated> q = cb.createQuery(EventRepeated.class);
-        Root<EventRepeated> root = q.from(EventRepeated.class);
+        CriteriaQuery<EventMRepeated> q = cb.createQuery(EventMRepeated.class);
+        Root<EventMRepeated> root = q.from(EventMRepeated.class);
         q.select(root);
         return getEntityManager().createQuery(q).getResultList();
     }
 
-    public List<EventSingleDay> getEventsSingleOfTheWeek(){
+    public List<EventMSingleDay> getEventsSingleOfTheWeek(){
         CriteriaBuilder cb = getCriteriaBuilder();
-        CriteriaQuery<EventSingleDay> q = cb.createQuery(EventSingleDay.class);
-        Root<EventSingleDay> root = q.from(EventSingleDay.class);
+        CriteriaQuery<EventMSingleDay> q = cb.createQuery(EventMSingleDay.class);
+        Root<EventMSingleDay> root = q.from(EventMSingleDay.class);
         q.select(root);
         q.where(
                 cb.between(
@@ -59,10 +58,10 @@ public class EventDAO extends AbstractDAOWithModel<Event,String> {
         return getEntityManager().createQuery(q).getResultList();
     }
 
-    public List<Event> getTwoNearestEvent(){
+    public List<EventM> getTwoNearestEvent(){
         CriteriaBuilder cb = getCriteriaBuilder();
-        CriteriaQuery<Event> q = cb.createQuery(Event.class);
-        Root<Event> root = q.from(Event.class);
+        CriteriaQuery<EventM> q = cb.createQuery(EventM.class);
+        Root<EventM> root = q.from(EventM.class);
         q.select(root);
         q.where(
                 cb.and(

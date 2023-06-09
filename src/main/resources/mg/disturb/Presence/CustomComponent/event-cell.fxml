@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<fx:root prefHeight="106.0" prefWidth="549.0" type="javafx.scene.control.ListCell" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <graphic>
+        <AnchorPane prefHeight="99.0" prefWidth="408.0">
+            <HBox prefHeight="90.0" prefWidth="408.0" spacing="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <ImageView fitHeight="99.0" fitWidth="103.0">
+                    <Image url="@Icons/event.png"/>
+                </ImageView>
+                <VBox prefHeight="100.0" prefWidth="1900">
+                    <Label fx:id="eventName" prefHeight="21.0" prefWidth="456.0" text="EventName">
+                  <font>
+                     <Font size="25.0" />
+                  </font></Label>
+                    <Label fx:id="dateOrRepeated" prefHeight="18.0" prefWidth="464.0" text="le: ../../..">
+                  <font>
+                     <Font name="System Italic" size="12.0" />
+                  </font></Label>
+                    <Label fx:id="betweenTime" prefHeight="18.0" prefWidth="448.0" text="entre: ..:..">
+                  <font>
+                     <Font name="System Italic" size="12.0" />
+                  </font></Label>
+                    <HBox alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="448.0" spacing="7.0">
+                        <JFXButton mnemonicParsing="false" onAction="#modifItem" text="Modifier">
+                            <graphic>
+                                <ImageView fitHeight="16.0" fitWidth="16.0">
+                                    <Image url="@Icons/update.png"/>
+                                </ImageView>
+                            </graphic>
+                        </JFXButton>
+                        <JFXButton mnemonicParsing="false" onAction="#deleteItem" text="Supprimer">
+                            <graphic>
+                                <ImageView fitHeight="16" fitWidth="16.0">
+                                    <Image url="@Icons/delete.png"/>
+                                </ImageView>
+                            </graphic>
+                        </JFXButton>
+                  <opaqueInsets>
+                     <Insets right="4.0" />
+                  </opaqueInsets>
+                  <padding>
+                     <Insets left="4.0" />
+                  </padding>
+                    </HBox>
+                </VBox>
+            </HBox>
+        </AnchorPane>
+
+    </graphic>
+</fx:root>

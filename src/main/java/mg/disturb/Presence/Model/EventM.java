@@ -10,7 +10,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "EVENT")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Event implements Serializable {
+public class EventM implements Serializable {
     @Id
     @Column(name = "event_id")
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -64,7 +64,7 @@ public class Event implements Serializable {
 
     @Override
     public String toString() {
-        return "Event{\n" +
+        return "EventM{\n" +
                 "\teventId='" + eventId + "'\n" +
                 "\teventName='" + eventName + "'\n" +
                 "\tbeginTime=" + beginTime + "\n" +

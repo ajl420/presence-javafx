@@ -36,7 +36,6 @@ public class PresenceRemoteService {
             System.out.println("Connected to new device...");
             InputStream input = socket.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-
             String line;
             do {
                 line = reader.readLine();

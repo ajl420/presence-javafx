@@ -12,20 +12,19 @@ public class StudentService {
             String numInscri,
             String nameStud,
             String fstNameStud
-    ) throws Exception {
-        Student student = studentDAO.findById(numInscri);
-        if(student != null){
-            throw new Exception("Ce numero d'inscription a ete deja utiliser!");
-        } else {
-            student = new Student();
-            student.setNumInscri(numInscri);
-            student.setNameStud(nameStud);
-            student.setFstNameStud(fstNameStud);
-            studentDAO.persiste(student);
-            return student;
-        }
+    ) {
+        Student student = new Student();
+        student.setNumInscri(numInscri);
+        student.setNameStud(nameStud);
+        student.setFstNameStud(fstNameStud);
+        studentDAO.persiste(student);
+        return student;
     }
 
+    public static boolean isExist(String numInscri){
+        Student student = studentDAO.findById(numInscri);
+        return student != null;
+    }
     public static void update(Student student){
         studentDAO.update(student);
     }

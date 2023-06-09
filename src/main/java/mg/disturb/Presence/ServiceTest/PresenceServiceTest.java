@@ -1,9 +1,7 @@
 package mg.disturb.Presence.ServiceTest;
 
-import mg.disturb.Presence.Model.Event;
 import mg.disturb.Presence.Model.Presence;
 import mg.disturb.Presence.Model.Student;
-import mg.disturb.Presence.Service.EventService;
 import mg.disturb.Presence.Service.PresenceService;
 import mg.disturb.Presence.Service.StudentService;
 

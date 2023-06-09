@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mg.disturb.Presence.Controller.DoPresenceController">
+    <TabPane fx:id="tabPane" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="49.0">
+        <Tab closable="false" text="Menu">
+            <AnchorPane>
+                <VBox alignment="CENTER" layoutX="-5.0" layoutY="50.0" prefHeight="253.0" prefWidth="560.0"
+                      AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="50.0">
+                    <Label fx:id="eventName" alignment="BOTTOM_CENTER" prefHeight="97.0" prefWidth="560.0"
+                           text="Current 1" VBox.vgrow="ALWAYS">
+                        <font>
+                            <Font size="56.0"/>
+                        </font>
+                    </Label>
+                    <Label fx:id="betweenTime" alignment="TOP_CENTER" prefHeight="27.0" prefWidth="1900"
+                           text="18:00  ~  19:00">
+                        <font>
+                            <Font size="18.0"/>
+                        </font>
+                    </Label>
+                    <HBox alignment="BOTTOM_CENTER" prefHeight="112.0" prefWidth="560.0" spacing="50.0">
+                        <children>
+                            <JFXButton onAction="#forward" mnemonicParsing="false" prefHeight="42.0" prefWidth="43.0">
+                                <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0">
+                                        <Image url="@../CustomComponent/Icons/undo2.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </JFXButton>
+                            <JFXButton mnemonicParsing="false" prefHeight="42.0" prefWidth="43.0">
+                                <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0">
+                                        <Image url="@../CustomComponent/Icons/remote_off.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </JFXButton>
+                            <JFXButton mnemonicParsing="false" prefHeight="42.0" prefWidth="43.0">
+                                <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0">
+                                        <Image url="@../CustomComponent/Icons/print.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </JFXButton>
+                            <JFXButton onAction="#showAbsTab" mnemonicParsing="false" prefHeight="42.0" prefWidth="43.0">
+                                <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0">
+                                        <Image url="@../CustomComponent/Icons/play.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </JFXButton>
+                        </children>
+                    </HBox>
+                </VBox>
+            <Label fx:id="dateOfPresence" alignment="CENTER_RIGHT" layoutX="336.0" layoutY="14.0" prefHeight="26.0" prefWidth="535.0" text="Lundi 06 Juin 2023" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            </AnchorPane>
+        </Tab>
+        <Tab fx:id="absTab" closable="false" text="Eleve absent">
+            <ListView fx:id="absStudentListView" layoutX="16.0" layoutY="49.0" prefHeight="315.0" prefWidth="560.0"/>
+        </Tab>
+        <Tab closable="false" text="Eleve present">
+            <ListView fx:id="presentStudentListView" layoutX="16.0" layoutY="49.0" prefHeight="331.0" prefWidth="560.0" />
+        </Tab>
+    </TabPane>
+    <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="217.0" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="5.0">
+        <JFXButton buttonType="RAISED" onAction="#forward" prefHeight="36.0" prefWidth="28.0">
+            <graphic>
+                <ImageView fitHeight="26.0" fitWidth="30.0">
+                    <Image url="@../CustomComponent/Icons/back.png" />
+                </ImageView>
+            </graphic>
+        </JFXButton>
+        <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="35.0" prefWidth="166.0" text="Presence">
+            <font>
+                <Font size="23.0" />
+            </font>
+        </Label>
+    </HBox>
+    <StackPane alignment="CENTER_LEFT" layoutY="6.0" prefHeight="35.0" prefWidth="217.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="6.0">
+        <ImageView fitHeight="18" fitWidth="18">
+            <Image url="@../CustomComponent/Icons/search.png" />
+        </ImageView>
+        <JFXTextField fx:id="searchField" alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="193.0" promptText="Recherche" />
+    </StackPane>
+    <JFXButton fx:id="remoteBtn" onAction="#remotePresence" prefHeight="35.0" prefWidth="43.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="6.0">
+        <graphic>
+            <ImageView fx:id="remoteIcon" fitHeight="27.0" fitWidth="30.0">
+                <Image url="@../CustomComponent/Icons/remote_off.png" />
+            </ImageView>
+        </graphic>
+    </JFXButton>
+</AnchorPane>

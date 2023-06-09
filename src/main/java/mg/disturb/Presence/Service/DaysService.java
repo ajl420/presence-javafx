@@ -20,11 +20,21 @@ public class DaysService {
             };
 
             for (int i = 0; i < daysLabel.length; i++) {
-                days.add(new Days((i+1),daysLabel[i],daysName[i]));
+                days.add(new Days(i,daysLabel[i],daysName[i]));
             }
         }
 
         return days;
+    }
+
+    public static int getIndexOf(String daysName){
+        List<Days> days = getDays();
+        Days day = days.stream().filter(d -> d.dayName() == daysName).toList().get(0);
+        return day.dayId();
+    }
+
+    public static List<String> getDaysName(){
+        return getDays().stream().map(Days::dayName).toList();
     }
 
 }

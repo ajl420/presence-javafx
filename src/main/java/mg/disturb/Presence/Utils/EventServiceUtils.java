@@ -1,10 +1,9 @@
 package mg.disturb.Presence.Utils;
 
 import mg.disturb.Presence.DAO.EventDAO;
-import mg.disturb.Presence.Model.Event;
-import mg.disturb.Presence.Model.EventRepeated;
-import mg.disturb.Presence.Model.EventSingleDay;
-import mg.disturb.Presence.Model.Days;
+import mg.disturb.Presence.Model.*;
+import mg.disturb.Presence.Model.EventM;
+import mg.disturb.Presence.Model.EventMRepeated;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -19,13 +18,13 @@ public class EventServiceUtils {
             Date eventDate,
             String exceptionId
     ){
-        List<Event> events = eventDAO.findTakenTimeIntervall( beginTime, endTime );
-        for (Event takenEvent:events) {
+        List<EventM> events = eventDAO.findTakenTimeIntervall( beginTime, endTime );
+        for (EventM takenEvent:events) {
             if(
-                    takenEvent.getClass() == EventSingleDay.class
+                    takenEvent.getClass() == EventMSingleDay.class
                             && !exceptionId.equals(takenEvent.getEventId())
             ){
-                Date takenDate = (Date) ((EventSingleDay) takenEvent).getEventDate();
+                Date takenDate = (Date) ((EventMSingleDay) takenEvent).getEventDate();
                 if(takenDate.equals(eventDate)){
                     return true;
                 }
@@ -41,14 +40,14 @@ public class EventServiceUtils {
             String exceptionId
     ){
 
-        List<Event> events = eventDAO.findTakenTimeIntervall( beginTime, endTime );
+        List<EventM> events = eventDAO.findTakenTimeIntervall( beginTime, endTime );
 
-        for (Event takenEvent:events) {
+        for (EventM takenEvent:events) {
              if (
-                    takenEvent.getClass() == EventRepeated.class
+                    takenEvent.getClass() == EventMRepeated.class
                             && !exceptionId.equals(takenEvent.getEventId())
              ) {
-                EventRepeated takenEventRepeated = (EventRepeated) takenEvent;
+                EventMRepeated takenEventRepeated = (EventMRepeated) takenEvent;
                 return takenEventRepeated.getRepeatedDayId() == repeatedDayId;
             }
         }
@@ -72,7 +71,7 @@ public class EventServiceUtils {
         return isDateTaken(beginTime,endTime,eventDate,"");
     }
 
-    public static boolean isActiveEvent(Event event){
+    public static boolean isActiveEvent(EventM event){
         Time currentTime = DateUtils.getCurrentTime();
 
         int diff = DateUtils.compareTime(
@@ -83,7 +82,7 @@ public class EventServiceUtils {
         return diff >= 0;
     }
 
-    public static boolean isDelayedEvent(Event event){
+    public static boolean isDelayedEvent(EventM event){
         Time currentTime = DateUtils.getCurrentTime();
 
         int diff = DateUtils.compareTime(

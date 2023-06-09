@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mg.disturb.Presence.Controller.MenuController">
+   <VBox alignment="CENTER" layoutX="168.0" layoutY="55.0" prefHeight="291.0" prefWidth="264.0" spacing="4.0">
+      <effect>
+         <Blend />
+      </effect>
+      <JFXButton buttonType="RAISED" lineSpacing="13.0" onAction="#doPresence" prefHeight="40.0" prefWidth="250.0" text="Faire la presence" textAlignment="RIGHT" viewOrder="5.0" />
+      <JFXButton buttonType="RAISED" prefHeight="40.0" onAction="#navigateToEvenScreen" prefWidth="250.0" text="Evenement" />
+      <JFXButton buttonType="RAISED" prefHeight="40.0" onAction="#navigateToStudentList" prefWidth="250.0" text="Etudiant" VBox.vgrow="ALWAYS" />
+      <JFXButton buttonType="RAISED" prefHeight="40.0" prefWidth="250.0" text="Historique et Statistique" />
+      <JFXButton buttonType="RAISED" prefHeight="40.0" prefWidth="250.0" text="Quitter" />
+   </VBox>
+</Pane>

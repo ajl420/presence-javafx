@@ -1,9 +1,9 @@
 package mg.disturb.Presence.Service;
 
 import mg.disturb.Presence.DAO.EventDAO;
-import mg.disturb.Presence.Model.Event;
-import mg.disturb.Presence.Model.EventRepeated;
-import mg.disturb.Presence.Model.EventSingleDay;
+import mg.disturb.Presence.Model.EventM;
+import mg.disturb.Presence.Model.EventMRepeated;
+import mg.disturb.Presence.Model.EventMSingleDay;
 import mg.disturb.Presence.Utils.DateUtils;
 import mg.disturb.Presence.Utils.EventServiceUtils;
 
@@ -15,20 +15,17 @@ import java.util.List;
 
 public class EventService {
     private static final EventDAO eventDAO = new EventDAO();
-    private static Event nearestEvent;
+    private static EventM nearestEvent;
 
     /* CREER UNE EVENEMENT UNIQUE */
-    public static EventSingleDay createForOnlyOneDay(
+    public static EventMSingleDay createForOnlyOneDay(
             String eventName,
             Time beginTime,
             Time endTime,
             Date eventDate
-    ) throws Exception {
-        if(EventServiceUtils.isDateTaken(beginTime,endTime,eventDate)){
-            throw new Exception("Date deja prise!!!");
-        }
+    ) {
 
-        EventSingleDay event = new EventSingleDay();
+        EventMSingleDay event = new EventMSingleDay();
         event.setEventDate(eventDate);
         event.setEndTime(endTime);
         event.setBeginTime(beginTime);
@@ -40,18 +37,13 @@ public class EventService {
 
 
     /* * CREER UNE EVENEMENT REPETE* */
-    public static EventRepeated createEventRepeated(
+    public static EventMRepeated createEventRepeated(
             String eventName,
             Time beginTime,
             Time endTime,
             int repeatedDayId
-    ) throws Exception {
-
-        if(EventServiceUtils.isDateTaken(beginTime,endTime,repeatedDayId)){
-            throw new Exception("Date deja prise!!!");
-        }
-
-        EventRepeated event = new EventRepeated();
+    ) {
+        EventMRepeated event = new EventMRepeated();
         event.setEventName(eventName);
         event.setBeginTime(beginTime);
         event.setEndTime(endTime);
@@ -62,58 +54,41 @@ public class EventService {
     }
 
     /* METTRE A JOUR UNE EVENEMENT UNIQUE */
-    public static void update(EventSingleDay event) throws Exception {
-        Time beginTime = event.getBeginTime();
-        Time endTime = event.getEndTime();
-        Date eventDate = (Date) event.getEventDate();
-        String eventId = event.getEventId();
-        if (EventServiceUtils.isDateTaken(beginTime,endTime,eventDate,eventId)){
-            throw new Exception("Date deja prise!!!");
-        }
-
+    public static void update(EventMSingleDay event) {
         eventDAO.update(event);
     }
 
     /* * METTRE A JOUR UNE EVENEMENT REPETE* */
-    public static void update(EventRepeated event) throws Exception {
-        Time beginTime = event.getBeginTime();
-        Time endTime = event.getEndTime();
-        int repeatedDayId = event.getRepeatedDayId();
-        String eventId = event.getEventId();
-
-        if(EventServiceUtils.isDateTaken(beginTime,endTime,repeatedDayId,eventId)){
-            throw new Exception("Date deja prise!!!");
-        }
-
+    public static void update(EventMRepeated event) {
         eventDAO.update(event);
     }
 
-    public static void update(Event event){
+    public static void update(EventM event){
         eventDAO.update(event);
     }
 
-    public static List<Event> getEventOfTheWeek(){
-        List<EventRepeated> eventsRepeated = eventDAO.getAllEventRepeated();
-        List<EventSingleDay> eventSingleDaysOfWeek = eventDAO.getEventsSingleOfTheWeek();
-        List<Event> eventOfTheWeek = new ArrayList<>();
+    public static List<EventM> getEventOfTheWeek(){
+        List<EventMRepeated> eventsRepeated = eventDAO.getAllEventRepeated();
+        List<EventMSingleDay> eventSingleDaysOfWeek = eventDAO.getEventsSingleOfTheWeek();
+        List<EventM> eventOfTheWeek = new ArrayList<>();
         eventOfTheWeek.addAll(eventsRepeated);
         eventOfTheWeek.addAll(eventSingleDaysOfWeek);
         return eventOfTheWeek;
     }
 
-    public static Event getNearestEvent(){
+    public static EventM getNearestEvent(){
         if(nearestEvent == null || EventServiceUtils.isDelayedEvent(nearestEvent)){
             nearestEvent = fetchNearestEvent();
         }
         return nearestEvent;
     }
 
-    private static Event fetchNearestEvent(){
-        List<Event> nearestTwoEvent = eventDAO.getTwoNearestEvent();
+    private static EventM fetchNearestEvent(){
+        List<EventM> nearestTwoEvent = eventDAO.getTwoNearestEvent();
         if(nearestTwoEvent.size() == 2){
             if (
-                    nearestTwoEvent.get(1).getClass() == EventSingleDay.class
-                            && nearestTwoEvent.get(0).getClass() == EventRepeated.class
+                    nearestTwoEvent.get(1).getClass() == EventMSingleDay.class
+                            && nearestTwoEvent.get(0).getClass() == EventMRepeated.class
             ){
                 return nearestTwoEvent.get(1);
             } else {
@@ -123,17 +98,17 @@ public class EventService {
             return nearestTwoEvent.get(0);
         }
 
-        Event voidEvent = new Event();
+        EventM voidEvent = new EventM();
         voidEvent.setEndTime(new Time(23,59,59));
         voidEvent.setEventName("VOID_EVENT");
         return voidEvent;
     }
 
-    public static Event findById(String id){
+    public static EventM findById(String id){
         return eventDAO.findById(id);
     }
-
-    public static void delete(Event event){
+    public static void delete(EventM event){
         eventDAO.delete(event);
     }
+    public static List<EventM> findAll() { return eventDAO.findAll(); }
 }
