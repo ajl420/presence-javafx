@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mg.disturb.Presence.Controller.PresenceSheet">
+   <children>
+       <JFXButton fx:id="remoteBtn" onAction="#printThis" prefHeight="35.0" prefWidth="43.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="6.0">
+           <graphic>
+               <ImageView fx:id="remoteIcon" fitHeight="27.0" fitWidth="30.0">
+                   <Image url="@../CustomComponent/Icons/print.png" />
+               </ImageView>
+           </graphic>
+       </JFXButton>
+       <HBox prefHeight="35.0" prefWidth="289.0" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="5.0">
+           <JFXButton buttonType="RAISED" onAction="#forward" prefHeight="36.0" prefWidth="28.0">
+               <graphic>
+                   <ImageView fitHeight="27.0" fitWidth="30.0">
+                       <Image url="@../CustomComponent/Icons/back.png" />
+                   </ImageView>
+               </graphic>
+           </JFXButton>
+           <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="35.0" prefWidth="223.0" text="Fiche de Presence">
+               <font>
+                   <Font size="23.0" />
+               </font>
+           </Label>
+       </HBox>
+           <TableView fx:id="tabStudent" layoutX="-3.0" layoutY="45.0" prefHeight="335.0" prefWidth="560.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="45.0">
+               <columns>
+                   <TableColumn fx:id="numInscrip" prefWidth="75.0" text="N.insc" />
+                   <TableColumn fx:id="nameStud" prefWidth="205.0" text="Nom" />
+                   <TableColumn fx:id="fstNameStud" prefWidth="205.0" text="Prenom" />
+                   <TableColumn fx:id="isPresent" prefWidth="75.0" text="Present" />
+               </columns>
+           </TableView>
+   </children>
+</AnchorPane>

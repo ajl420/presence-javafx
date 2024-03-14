@@ -26,7 +26,7 @@ public class PresenceService {
         if (
                 (currentPresence == null ||
                 EventServiceUtils.isDelayedEvent(currentPresence.getEvent())) &&
-                !nearestEvent.getEventName().equals("VOID_EVENT")
+                nearestEvent != null
         ){
             Presence fetchedCurrentPresence =
                     presenceDAO.getCurrentPresenceFrom(nearestEvent);
@@ -40,6 +40,8 @@ public class PresenceService {
             } else {
                 currentPresence = fetchedCurrentPresence;
             }
+        } else if(nearestEvent == null) {
+            currentPresence = null;
         }
 
         return currentPresence;

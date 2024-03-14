@@ -2,6 +2,7 @@ package mg.disturb.Presence.Controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.net.httpserver.HttpServer;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,26 +13,18 @@ import javafx.scene.image.ImageView;
 import mg.disturb.Presence.CustomComponent.Icons;
 import mg.disturb.Presence.CustomComponent.StudentAbsentCellFactory;
 import mg.disturb.Presence.CustomComponent.StudentPresentCellFactory;
-import mg.disturb.Presence.Dialog.EventSingleDayForms;
 import mg.disturb.Presence.Dialog.RemotePresenceDialog;
-import mg.disturb.Presence.Dialog.StudentForm;
 import mg.disturb.Presence.Model.EventM;
-import mg.disturb.Presence.Model.EventMSingleDay;
 import mg.disturb.Presence.Model.Presence;
 import mg.disturb.Presence.Model.Student;
+import mg.disturb.Presence.Navigation.Navigation;
+import mg.disturb.Presence.Navigation.Navigator;
 import mg.disturb.Presence.Service.PresenceService;
 import mg.disturb.Presence.Service.StudentService;
 import mg.disturb.Presence.Utils.DateUtils;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.Socket;
+import java.io.*;
 import java.net.URL;
 import java.util.*;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
 
 public class DoPresenceController extends AbstractDefaultScreenController implements Initializable {
     public ListView<Student> absStudentListView;
@@ -45,6 +38,8 @@ public class DoPresenceController extends AbstractDefaultScreenController implem
     public TabPane tabPane;
     public JFXButton remoteBtn;
     public ImageView remoteIcon;
+    public ImageView remoteIcon2;
+    public JFXButton remoteBtn2;
     private Presence currentPresence;
     private EventM currentEvent;
 
@@ -76,8 +71,8 @@ public class DoPresenceController extends AbstractDefaultScreenController implem
         currentEvent = currentPresence.getEvent();
         eventName.setText(currentEvent.getEventName());
         String timePresent =
-                currentEvent.getBeginTime().toString().replace(":00$","") + "   ~   " +
-                        currentEvent.getEndTime().toString().replace(":00$","");
+                currentEvent.getBeginTime().toString().replaceAll(":00$","") + "   ~   " +
+                        currentEvent.getEndTime().toString().replaceAll(":00$","");
         betweenTime.setText(timePresent);
         dateOfPresence.setText(DateUtils.toFrString(DateUtils.getCurrentDate()));
     }
@@ -116,11 +111,14 @@ public class DoPresenceController extends AbstractDefaultScreenController implem
             ){
                 showAbsTab(actionEvent);
                 remoteBtn.setDisable(true);
+                remoteBtn2.setDisable(true);
                 remoteIcon.setImage(Icons.load("remote_on"));
+                remoteIcon2.setImage(Icons.load("remote_on"));
+
                 Thread thread = new Thread(()->{
-                    Socket socket = (Socket) contextLoader.load(RemotePresenceDialog.getClResultKey());
+                    HttpServer httpServer = (HttpServer) contextLoader.load(RemotePresenceDialog.getClResultKey());
                     try {
-                        onRemoteAccepted(socket);
+                        onRemoteAccepted(httpServer);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -130,42 +128,68 @@ public class DoPresenceController extends AbstractDefaultScreenController implem
         });
     }
 
-    private void onRemoteAccepted(Socket socket) throws IOException {
-        InputStream input = socket.getInputStream();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-        String numInscript = "";
-        int attempt = 5;
-        do {
-            numInscript = reader.readLine();
-            String finalNumInscript = numInscript;
-            if(finalNumInscript == null){
-                attempt--;
+    private void onRemoteAccepted(HttpServer httpServer) throws IOException {
+         httpServer.createContext("/connection-test", httpExchange -> {
+            String method = httpExchange.getRequestMethod();
+            if(method.equals("GET")){
+                OutputStream outStream = httpExchange.getResponseBody();
+                StringBuilder sb = new StringBuilder("Hello from server");
+                String resStr = sb.toString();
+                httpExchange.sendResponseHeaders(200,resStr.length());
+                outStream.write(resStr.getBytes());
+                outStream.flush();;
+                outStream.close();
             }
-            System.out.println(finalNumInscript);
-            List<Student> filtredStudent = absStudentListView
-                    .getItems()
-                    .stream()
-                    .filter(student1 -> student1.getNumInscri().equals(finalNumInscript))
-                    .toList();
-            System.out.println(filtredStudent);
-            if(filtredStudent.size() == 1){
-                Student student = filtredStudent.get(0);
-                PresenceService.setToPresent(currentPresence,student);
-                Platform.runLater(()->{
-                    absStudentListView.getItems().removeIf(
-                            student1 -> student1.getNumInscri().equals(finalNumInscript)
-                    );
-                    presentStudentListView.getItems().add(student);
-                });
-            } else {
-                System.out.println("Cette eleve n'existe pas");
-            }
-        } while (attempt > 0);
-        System.out.println("Tapaka pory oooooo!");
-        Platform.runLater(()->{
-            remoteBtn.setDisable(false);
-            remoteIcon.setImage(Icons.load("remote_off"));
         });
+
+         httpServer.createContext("/set-to-present",httpExchange -> {
+             String method = httpExchange.getRequestMethod();
+             if (method.equals("POST")){
+                 InputStream inStream = httpExchange.getRequestBody();
+                 OutputStream outStream = httpExchange.getResponseBody();
+                 Scanner sc = new Scanner(inStream);
+                 String data = sc.nextLine();
+                 String[] datas = data.split("&");
+                 String numInscript = datas[0].replace("numInscript=","");
+                 String resStr = "";
+
+                 List<Student> filtredStudent = absStudentListView
+                         .getItems()
+                         .stream()
+                         .filter(student1 -> student1.getNumInscri().equals(numInscript))
+                         .toList();
+                 if(filtredStudent.size() == 1){
+                     Student student = filtredStudent.get(0);
+                     PresenceService.setToPresent(currentPresence,student);
+                     Platform.runLater(()->{
+                         presentStudentListView.getItems().add(student);
+                         absStudentListView.getItems().removeIf(
+                                 student1 -> student1.getNumInscri().equals(numInscript)
+                         );
+                     });
+
+                     resStr = student.getFstNameStud() +" est maintenant present";
+                 } else {
+                     Student findedStudent = StudentService.findById(numInscript);
+                     if(findedStudent != null){
+                         resStr = "Cette eleve est deja present";
+                     } else {
+                         resStr = "Cette eleve n'existe pas";
+                     }
+                 }
+
+                 httpExchange.sendResponseHeaders(200,resStr.length());
+                 outStream.write(resStr.getBytes());
+                 outStream.flush();;
+                 outStream.close();
+             }
+         });
+
+        httpServer.start();
+    }
+
+    public void printThisPresence(ActionEvent actionEvent) throws IOException {
+        Navigation.getNavigator().navigateTo("presence-sheet","Fiche de Presence",currentPresence);
     }
 }
 

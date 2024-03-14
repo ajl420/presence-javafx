@@ -13,12 +13,12 @@
                 <ImageView fitHeight="32.0" fitWidth="32.0" HBox.hgrow="ALWAYS">
                     <Image url="@Icons/avatar.png" />
                 </ImageView>
-                <Label fx:id="fullNameStud" prefHeight="36.0" prefWidth="360.0" text="ANDRIAMIHAJA Juliot Leonce" wrapText="true" HBox.hgrow="ALWAYS">
+                <Label fx:id="fullNameStud" prefHeight="36.0" text="ANDRIAMIHAJA Juliot Leonce" wrapText="true" HBox.hgrow="ALWAYS">
                     <font>
                         <Font size="22.0" />
                     </font>
                 </Label>
-                <HBox alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="210.0" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER_RIGHT" prefHeight="36.0" minWidth="180" HBox.hgrow="ALWAYS">
                     <Label fx:id="numInscript" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="1.0" prefHeight="36.0" prefWidth="83.0" text="079I22" textOverrun="LEADING_ELLIPSIS" HBox.hgrow="ALWAYS">
                         <font>
                             <Font size="16.0" />

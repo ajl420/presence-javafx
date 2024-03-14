@@ -1,5 +1,6 @@
 package mg.disturb.Presence.Networking;
 
+import com.sun.net.httpserver.HttpServer;
 import mg.disturb.Presence.Utils.Validation;
 
 import java.io.IOException;
@@ -7,18 +8,10 @@ import java.net.*;
 import java.util.Enumeration;
 import java.util.List;
 
-public class PresenceServer extends ServerSocket {
-    private static PresenceServer presenceServer;
-    private PresenceServer() throws IOException {
-        super(6789,1, getAddress());
-//        super(5789);
-    }
+public class PresenceServer {
 
-    public static PresenceServer getInstance() throws IOException {
-        if(presenceServer == null){
-            presenceServer = new PresenceServer();
-        }
-        return presenceServer;
+    public static HttpServer startServer() throws IOException {
+        return HttpServer.create(convertToSocketAddr(getAddress()),0);
     }
 
     public static InetAddress getAddress() throws SocketException, UnknownHostException {
@@ -34,7 +27,10 @@ public class PresenceServer extends ServerSocket {
             }
         }
 
-        InetAddress chosenAddr1 = chosenAddr;
-        return chosenAddr1;
+        return chosenAddr;
+    }
+
+    public static InetSocketAddress convertToSocketAddr(InetAddress inetAddress){
+        return new InetSocketAddress(inetAddress,6789);
     }
 }

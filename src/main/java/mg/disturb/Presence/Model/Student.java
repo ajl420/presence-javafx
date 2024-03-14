@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 @Table(name = "STUDENT")
@@ -17,15 +18,16 @@ public class Student implements Serializable {
     @Column(name = "fstname_stud")
     private String fstNameStud;
 
-    @ManyToMany(cascade = {CascadeType.MERGE})
-    private Collection<Presence> presences = new ArrayList<Presence>();
+//    @ManyToMany(cascade = {CascadeType.DETACH})
+//    @JoinColumn(foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
+//    private Collection<Presence> presences = new ArrayList<Presence>();
 
     public Student(){
     }
 
-    public void setPresences(Collection<Presence> presences) {
-        this.presences = presences;
-    }
+//    public void setPresences(Collection<Presence> presences) {
+//        this.presences = presences;
+//    }
 
     public void setFstNameStud(String fstNameStud) {
         this.fstNameStud = fstNameStud;
@@ -51,22 +53,23 @@ public class Student implements Serializable {
         return nameStud;
     }
 
-    public Collection<Presence> getPresences() {
-        return presences;
-    }
+//    public Collection<Presence> getPresences() {
+//        return presences;
+//    }
 
-    public void addPresence(Presence presence){
-        getPresences().add(presence);
-    }
+//    public void addPresence(Presence presence){
+//        getPresences().add(presence);
+//    }
 
-    public void removePresence(Presence presence){
-        getPresences().removeIf(presence1 -> presence1.getPresenceId() == presence.getPresenceId());
-    }
+//    public void removePresence(Presence presence){
+//        getPresences().removeIf(presence1 -> presence1.getPresenceId() == presence.getPresenceId());
+//    }
 
     public boolean isPresentOn(Presence presence){
-        return getPresences()
+        return presence
+                .getStudents()
                 .stream()
-                .anyMatch(presence1 -> presence1.getPresenceId() == presence.getPresenceId());
+                .anyMatch(student -> Objects.equals(student.getNumInscri(), getNumInscri()));
     }
 
     @Override
@@ -75,7 +78,7 @@ public class Student implements Serializable {
                 "\tnumInscri='" + numInscri + "'\n" +
                 "\tnameStud='" + nameStud + "'\n" +
                 "\tfstNameStud='" + fstNameStud + "'\n" +
-                "\tpresences=" + presences.size() + "\n" +
+//                "\tpresences=" + presences.size() + "\n" +
                 '}';
     }
 }

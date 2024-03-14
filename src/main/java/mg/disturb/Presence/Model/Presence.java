@@ -19,10 +19,12 @@ public class Presence implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date presenceDate;
 
-    @ManyToMany(cascade = {CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.DETACH})
+    @JoinColumn(foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
     private Collection<Student> students = new ArrayList<>();
 
     @ManyToOne(cascade = {CascadeType.MERGE})
+    @JoinColumn(foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
     private EventM event;
 
     public Date getPresenceDate() {
@@ -41,21 +43,21 @@ public class Presence implements Serializable {
     }
     public void setEvent(EventM event) {
         this.event = event;
-        event.getPresences().add(this);
+//        event.getPresences().add(this);
     }
     public void setPresenceDate(Date presenceDate) {
         this.presenceDate = presenceDate;
     }
 
     public void addStudent(Student student){
-        if(!student.isPresentOn(this)){
+//        if(!student.isPresentOn(this)){
             getStudents().add(student);
-            student.addPresence(this);
-        }
+//            student.addPresence(this);
+//        }
     }
     public void removeStudent(Student student){
         getStudents().removeIf((student1) -> student1.getNumInscri() == student.getNumInscri());
-        student.removePresence(this);
+//        student.removePresence(this);
     }
 
     @Override

@@ -18,7 +18,6 @@ public class PresenceServiceTest {
 //        Presence p = PresenceService.findById("4653e8d5-eff4-4135-b89a-2081868bcae5");
         Presence p = PresenceService.getCurrentPresence();
         PresenceService.setToPresent(p,s1);
-        System.out.println(s1.isPresentOn(p));
     }
 
     public static void setToAbsent(){
@@ -26,7 +25,6 @@ public class PresenceServiceTest {
 //        Presence p = PresenceService.findById("4653e8d5-eff4-4135-b89a-2081868bcae5");
         Presence p = PresenceService.getCurrentPresence();
         PresenceService.setToAbsent(p,s1);
-        System.out.println(s1.isPresentOn(p));
     }
 
     public static void getCurrentPresence(){

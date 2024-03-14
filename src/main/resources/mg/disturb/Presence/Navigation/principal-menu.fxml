@@ -1,18 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
-<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mg.disturb.Presence.Controller.MenuController">
-   <VBox alignment="CENTER" layoutX="168.0" layoutY="55.0" prefHeight="291.0" prefWidth="264.0" spacing="4.0">
-      <effect>
-         <Blend />
-      </effect>
-      <JFXButton buttonType="RAISED" lineSpacing="13.0" onAction="#doPresence" prefHeight="40.0" prefWidth="250.0" text="Faire la presence" textAlignment="RIGHT" viewOrder="5.0" />
-      <JFXButton buttonType="RAISED" prefHeight="40.0" onAction="#navigateToEvenScreen" prefWidth="250.0" text="Evenement" />
-      <JFXButton buttonType="RAISED" prefHeight="40.0" onAction="#navigateToStudentList" prefWidth="250.0" text="Etudiant" VBox.vgrow="ALWAYS" />
-      <JFXButton buttonType="RAISED" prefHeight="40.0" prefWidth="250.0" text="Historique et Statistique" />
-      <JFXButton buttonType="RAISED" prefHeight="40.0" prefWidth="250.0" text="Quitter" />
-   </VBox>
-</Pane>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mg.disturb.Presence.Controller.MenuController">
+   <children>
+      <HBox alignment="CENTER_RIGHT" layoutX="14.0" layoutY="270.0" prefHeight="50.0" prefWidth="560.0" spacing="12.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <JFXButton fx:id="doPresenceBtn" onAction="#doPresence" prefHeight="40.0" prefWidth="6.0">
+            <graphic>
+               <ImageView fitHeight="32.0" fitWidth="32.0">
+                  <Image url="@../CustomComponent/Icons/play.png" />
+               </ImageView>
+            </graphic>
+         </JFXButton>
+         <JFXButton onAction="#navigateToStudentList" prefHeight="40.0" prefWidth="34.0">
+            <graphic>
+               <ImageView fitHeight="32.0" fitWidth="32.0">
+                  <Image url="@../CustomComponent/Icons/avatar.png" />
+               </ImageView>
+            </graphic>
+         </JFXButton>
+         <JFXButton onAction="#navigateToEvenScreen" prefHeight="40.0" prefWidth="34.0">
+            <graphic>
+               <ImageView fitHeight="32.0" fitWidth="32.0">
+                  <Image url="@../CustomComponent/Icons/event.png" />
+               </ImageView>
+            </graphic>
+         </JFXButton>
+         <JFXButton onAction="#closeApp" prefHeight="40.0" prefWidth="34.0">
+            <graphic>
+               <ImageView fitHeight="32.0" fitWidth="32.0">
+                  <Image url="@../CustomComponent/Icons/poweroff1.png" />
+               </ImageView>
+            </graphic>
+         </JFXButton>
+      </HBox>
+      <Label layoutX="20.0" layoutY="14.0" prefHeight="45.0" prefWidth="560.0" text="Here or Not?">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <HBox layoutX="200.0" layoutY="109.0" prefHeight="181.0" prefWidth="560.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <children>
+            <ImageView fitHeight="180.0" fitWidth="212.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../CustomComponent/Icons/presence1.png" />
+            </ImageView>
+            <VBox prefHeight="180.0" prefWidth="396.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="titleInfo" prefHeight="80.0" prefWidth="380.0" text="Evenement">
+                     <font>
+                        <Font size="34.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="eventName" prefHeight="25.0" prefWidth="380.0" text="Nom: ?????">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="chronoLabel" prefHeight="26.0" prefWidth="380.0" text="Debut dans: ??:??:??">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

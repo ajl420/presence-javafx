@@ -1,15 +1,21 @@
 package mg.disturb.Presence.Navigation;
 
+import io.github.palexdev.mfxcore.utils.fx.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import mg.disturb.Presence.CustomComponent.Icons;
 import mg.disturb.Presence.Utils.SingleTone;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 public class Navigator extends SingleTone {
     private Stage stage;
+
+    private Scene scene;
     private ContextLoader contextLoader;
     private NavigationHistory navigationHistory;
 
@@ -23,6 +29,7 @@ public class Navigator extends SingleTone {
     ){
         super();
         this.stage = config.getStage();
+        this.scene = config.getScene();
         this.contextLoader = contextLoader;
         this.navigationHistory = navigationHistory;
     }
@@ -48,9 +55,10 @@ public class Navigator extends SingleTone {
         navigationHistory.setCurrentScreenName(sceneName);
         contextLoader.save(context);
         Parent root = fxmlLoader.load();
-        Scene scene = new Scene(root);
+//        Scene scene = new Scene(root);
+        scene.setRoot(root);
         getStage().setTitle(title);
-        getStage().setScene(scene);
+//        getStage().setScene(scene);
     }
 
     public void navigateTo(

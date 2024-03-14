@@ -1,6 +1,7 @@
 package mg.disturb.Presence.Dialog;
 
 import com.jfoenix.controls.JFXBadge;
+import com.sun.net.httpserver.HttpServer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -61,9 +62,8 @@ public class RemotePresenceDialog extends AbstractCustomDialog implements Initia
                                 buttonType.getButtonData())
                 ){
                     try {
-                        PresenceServer presenceServer = PresenceServer.getInstance();
-                        Socket socket = presenceServer.accept();
-                        cl.save(getClResultKey(),socket);
+                        HttpServer httpServer = PresenceServer.startServer();
+                        cl.save(getClResultKey(),httpServer);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

@@ -19,12 +19,21 @@ import mg.disturb.Presence.Utils.Validation;
 
 public class App extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("principal-menu.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Navigation.configure(
-                new NavigationConfig(stage,"principal-menu")
+                new NavigationConfig(
+                        stage,
+                        scene,
+                        "principal-menu"
+                )
         );
 
         stage.setTitle("Menu Principale");
@@ -35,7 +44,6 @@ public class App extends Application {
     public static void main(String[] args) throws Exception {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
         java.util.logging.Logger.getLogger("javafx.fxml.FXMLLoader").setLevel(Level.OFF);
-        EventService.getNearestEvent();
         launch(args);
     }
 }

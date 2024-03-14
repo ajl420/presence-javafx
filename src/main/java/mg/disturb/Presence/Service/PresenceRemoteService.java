@@ -15,14 +15,14 @@ public class PresenceRemoteService {
     private static boolean serverIsActive = false;
 
     public static void startServer(ServerCallBack serverCallBack) throws IOException {
-        server = PresenceServer.getInstance();
+//        server = PresenceServer.getInstance();
         serverIsActive = true;
         String addr = PresenceServer.getAddress().getHostAddress();
         serverCallBack.run(addr);
     }
 
     public static void killServer() throws IOException {
-        server.close();
+//        server.close();
         serverIsActive = false;
     }
 
@@ -31,17 +31,17 @@ public class PresenceRemoteService {
     }
 
     public static void listenToMessage(ServerCallBack serverCallBack) throws IOException {
-        while (serverIsActive){
-            Socket socket = getServer().accept();
-            System.out.println("Connected to new device...");
-            InputStream input = socket.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-            String line;
-            do {
-                line = reader.readLine();
-                System.out.println("New mwssage comming...");
-                serverCallBack.run(line);
-            } while (!line.equals("close"));
-        }
+//        while (serverIsActive){
+//            Socket socket = getServer().accept();
+//            System.out.println("Connected to new device...");
+//            InputStream input = socket.getInputStream();
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+//            String line;
+//            do {
+//                line = reader.readLine();
+//                System.out.println("New mwssage comming...");
+//                serverCallBack.run(line);
+//            } while (!line.equals("close"));
+//        }
     }
 }

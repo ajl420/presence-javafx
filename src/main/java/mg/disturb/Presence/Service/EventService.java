@@ -83,6 +83,10 @@ public class EventService {
         return nearestEvent;
     }
 
+    public static void clearNearestEvent(){
+        nearestEvent = null;
+    }
+
     private static EventM fetchNearestEvent(){
         List<EventM> nearestTwoEvent = eventDAO.getTwoNearestEvent();
         if(nearestTwoEvent.size() == 2){
@@ -98,10 +102,8 @@ public class EventService {
             return nearestTwoEvent.get(0);
         }
 
-        EventM voidEvent = new EventM();
-        voidEvent.setEndTime(new Time(23,59,59));
-        voidEvent.setEventName("VOID_EVENT");
-        return voidEvent;
+
+        return null;
     }
 
     public static EventM findById(String id){

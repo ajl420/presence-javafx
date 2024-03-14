@@ -35,14 +35,14 @@
                                     </ImageView>
                                 </graphic>
                             </JFXButton>
-                            <JFXButton mnemonicParsing="false" prefHeight="42.0" prefWidth="43.0">
+                            <JFXButton fx:id="remoteBtn2" onAction="#remotePresence" mnemonicParsing="false" prefHeight="42.0" prefWidth="43.0">
                                 <graphic>
-                                    <ImageView fitHeight="40.0" fitWidth="40.0">
+                                    <ImageView fx:id="remoteIcon2" fitHeight="40.0" fitWidth="40.0">
                                         <Image url="@../CustomComponent/Icons/remote_off.png"/>
                                     </ImageView>
                                 </graphic>
                             </JFXButton>
-                            <JFXButton mnemonicParsing="false" prefHeight="42.0" prefWidth="43.0">
+                            <JFXButton onAction="#printThisPresence" mnemonicParsing="false" prefHeight="42.0" prefWidth="43.0">
                                 <graphic>
                                     <ImageView fitHeight="40.0" fitWidth="40.0">
                                         <Image url="@../CustomComponent/Icons/print.png"/>

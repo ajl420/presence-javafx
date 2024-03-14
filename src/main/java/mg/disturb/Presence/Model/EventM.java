@@ -27,8 +27,9 @@ public class EventM implements Serializable {
     @Temporal(TemporalType.TIME)
     private Time endTime;
 
-    @OneToMany(cascade = {CascadeType.MERGE})
-    private Collection<Presence> presences = new ArrayList<>();
+//    @OneToMany(cascade = {CascadeType.REMOVE})
+//    @JoinColumn(foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
+//    private Collection<Presence> presences = new ArrayList<>();
     public String getEventId() {
         return eventId;
     }
@@ -58,9 +59,9 @@ public class EventM implements Serializable {
         this.eventName = eventName;
     }
 
-    public Collection<Presence> getPresences() {
-        return presences;
-    }
+//    public Collection<Presence> getPresences() {
+//        return presences;
+//    }
 
     @Override
     public String toString() {
@@ -69,7 +70,7 @@ public class EventM implements Serializable {
                 "\teventName='" + eventName + "'\n" +
                 "\tbeginTime=" + beginTime + "\n" +
                 "\tendTime=" + endTime + "\n" +
-                "\tpresences=" + presences.size() + "\n" +
+//                "\tpresences=" + presences.size() + "\n" +
                 '}';
     }
 }

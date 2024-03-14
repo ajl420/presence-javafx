@@ -15,6 +15,7 @@ import mg.disturb.Presence.Dialog.EventSingleDayForms;
 import mg.disturb.Presence.Model.EventM;
 import mg.disturb.Presence.Model.EventMRepeated;
 import mg.disturb.Presence.Model.EventMSingleDay;
+import mg.disturb.Presence.Navigation.Navigation;
 import mg.disturb.Presence.Service.EventService;
 import java.net.URL;
 import java.util.List;
@@ -39,6 +40,10 @@ public class EventListController extends AbstractDefaultScreenController impleme
         toggleMenuBtn.setOnMousePressed(event -> {
             contextMenu.show(toggleMenuBtn,event.getScreenX(),event.getScreenY());
         });
+
+        System.out.println(Navigation.getHistory().getLastScreenName());
+        System.out.println(Navigation.getHistory().getCurrentScreenName());
+
     }
 
 
@@ -70,4 +75,5 @@ public class EventListController extends AbstractDefaultScreenController impleme
             }
         });
     }
+
 }
